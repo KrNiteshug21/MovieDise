@@ -1,3 +1,4 @@
+import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import About from "./component/About";
@@ -5,6 +6,8 @@ import Contacts from "./component/Contacts";
 import Homepage from "./component/Homepage";
 import MoviePage from "./component/MoviePage";
 import ShowPage from "./component/ShowPage";
+import IndexPage from "./component/IndexPage";
+import SearchResults from "./component/SearchResults";
 import { Route, Routes } from "react-router-dom";
 import { DataProvider } from "./Context/DataContext";
 
@@ -14,7 +17,8 @@ function App() {
       <DataProvider>
         <Header />
         <Routes>
-          <Route path="/" element={<Homepage />} />
+          <Route index element={<IndexPage />} />
+          <Route path="/home" element={<Homepage />} />
           <Route path="/about" element={<About />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/movie/:id" element={<MoviePage />} />

@@ -6,6 +6,7 @@ const Movie = ({ asset, link }) => {
   const [hover, setHover] = useState(false);
   const moviePosterUrl = "https:image.tmdb.org/t/p/w500";
   const showsPosterUrl = "https://image.tmdb.org/t/p/w185";
+  const posterUrl = "https://image.tmdb.org/t/p/w342";
 
   const handleMouseEnter = () => {
     setHover(true);
@@ -19,7 +20,9 @@ const Movie = ({ asset, link }) => {
         <img
           onMouseOver={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          src={`${moviePosterUrl || showsPosterUrl}/${asset?.poster_path}`}
+          src={`${moviePosterUrl || showsPosterUrl || posterUrl}/${
+            asset?.poster_path
+          }`}
           alt={asset?.title}
         />
         <div
@@ -32,7 +35,7 @@ const Movie = ({ asset, link }) => {
         >
           <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
             <div className="voteAverage">
-              <p>{asset?.vote_average}</p>
+              <p>{asset?.vote_average?.toFixed(1)}</p>
             </div>
             <p>{asset?.release_date || asset?.first_air_date}</p>
           </div>

@@ -18,7 +18,6 @@ const MoviePage = () => {
     else if (mov.type === "Clip") return mov;
     else return movieVideo[0];
   });
-  console.log("trailer", trailer);
 
   useEffect(() => {
     const options = {
@@ -35,7 +34,7 @@ const MoviePage = () => {
     axios
       .request(options)
       .then(function (response) {
-        // console.log("movie", response.data);
+        console.log("movie", response.data);
         setMovie(response.data);
         setLoading(false);
       })
@@ -60,7 +59,7 @@ const MoviePage = () => {
       .request(options)
       .then(function (response) {
         setMovieVideo(response.data.results);
-        console.log("movieVideo", response.data.results);
+        // console.log("movieVideo", response.data.results);
       })
       .catch(function (error) {
         console.error(error);
@@ -70,16 +69,7 @@ const MoviePage = () => {
   return (
     <section className="moviePage">
       <div className="movieIntro setWidth">
-        {loading && (
-          <h1
-            style={{
-              display: "grid",
-              placeContent: "center",
-            }}
-          >
-            LOADING... PLEASE WAIT
-          </h1>
-        )}
+        {loading && <h1>LOADING... PLEASE WAIT</h1>}
         {!loading && (
           <>
             <img
@@ -89,8 +79,14 @@ const MoviePage = () => {
             />
             <div className="movieInfo">
               <h2>
-                {movie?.title} {movie?.release_date?.slice(0, 4)}
+                {movie?.title} ({movie?.release_date?.slice(0, 4)})
               </h2>
+              <div>
+                <b>Languages:</b>{" "}
+                {movie?.spoken_languages?.map((lang, index) => {
+                  return <span key={index}>{lang?.english_name}, </span>;
+                })}
+              </div>
               <div className="genre">
                 {movie?.genres?.map((gen) => (
                   <span key={gen?.id}>
@@ -105,17 +101,19 @@ const MoviePage = () => {
                 Play Trailer
               </button>
               <p className="overview">{movie?.overview}</p>
+              <p>
+                <b>Status:</b> {movie?.status}
+              </p>
             </div>
           </>
         )}
       </div>
-      {showTrailer && trailer && <h1>Oops! Trailer not available</h1>}
       {showTrailer && (
         <div className="trailer videoWrapper">
           <iframe
             title="Featured Movie Trailer"
             src={`https://www.youtube.com/embed/${trailer?.key}`}
-            frameborder="0"
+            frameBorder="0"
             allowFullscreen
           ></iframe>
           <button className="close" onClick={() => setShowTrailer(false)}>

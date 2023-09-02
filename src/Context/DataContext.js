@@ -9,6 +9,8 @@ export const DataProvider = ({ children }) => {
   const [shows, setShows] = useState([]);
   const [filterShows, setFilterShows] = useState("airing_today");
   const API_KEY = "fd66dd3881aa6ecdadeedc7bff8b736c";
+  const [search, setSearch] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     const getMovies = async () => {
@@ -57,6 +59,34 @@ export const DataProvider = ({ children }) => {
     { id: "4", title: "Top Rated", value: "top_rated" },
   ];
 
+  useEffect(() => {
+    const options = {
+      method: "GET",
+      url: "https://api.themoviedb.org/3/search/multi",
+      params: {
+        query: `${search}`,
+        include_adult: "false",
+        language: "en-US",
+        page: "1",
+      },
+      headers: {
+        accept: "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZDY2ZGQzODgxYWE2ZWNkYWRlZWRjN2JmZjhiNzM2YyIsInN1YiI6IjY0YzEyMzU1MTNhMzIwMDBlMjFhOThlNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fibMrLld6TS6bvaKZtYYLL9TIpNC1PdRcKzFdu4QIwo",
+      },
+    };
+
+    axios
+      .request(options)
+      .then((response) => {
+        console.log("SearchResults", response.data.results);
+        setSearchResults(response.data.results);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [search]);
+
   return (
     <DataContext.Provider
       value={{
@@ -71,6 +101,9 @@ export const DataProvider = ({ children }) => {
         API_KEY,
         moviefilterArray,
         showFilterArray,
+        search,
+        setSearch,
+        searchResults,
       }}
     >
       {children}

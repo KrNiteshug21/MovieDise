@@ -14,7 +14,11 @@
   --dark-clr-500: #526d82;
   --dark-clr-700: #27374d;
 
-  --maxWidth: min(calc(100% - 3rem), 1300px);
+  --maxWidth: min(calc(100% - 3rem), 1200px);
+}
+
+a {
+  color: inherit;
 }
 
 body::-webkit-scrollbar {
@@ -41,10 +45,17 @@ body::-webkit-scrollbar-track {
   max-width: var(--maxWidth);
   margin-inline: auto;
 }
+.container {
+  background-color: var(--dark-clr-100);
+  color: var(--dark-clr-700);
+  padding-block: 3rem;
+}
 
+/*               Header                        */
 .header {
   background-color: var(--dark-clr-700);
   color: var(--dark-clr-100);
+  position: relative;
 }
 
 .webTitle a {
@@ -65,6 +76,8 @@ body::-webkit-scrollbar-track {
 .navbar {
   font-size: 1.25rem;
   display: flex;
+  justify-self: center;
+  align-items: center;
   flex-wrap: wrap;
   font-weight: 700;
   font-size: 1.35rem;
@@ -75,7 +88,23 @@ body::-webkit-scrollbar-track {
   padding: 0.5rem 1.25rem;
   border-radius: 0.25rem;
 }
+.searchDiv {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-content: center;
+}
+.searchField {
+  width: 25rem;
+  height: 3rem;
+  padding: 0.5rem 1rem;
+  outline: none;
+  border-radius: 1.5rem;
+  border: 2px solid var(--dark-clr-300);
+  font-size: 1.15rem;
+}
 
+/*                 Content               */
 .contentPage {
   background-color: var(--dark-clr-100);
   padding-block: 3rem;
@@ -254,6 +283,7 @@ body::-webkit-scrollbar-track {
 }
 
 .form input[type="text"],
+.form input[type="password"],
 .form textarea {
   height: 3rem;
   padding: 0.5rem 1rem;
@@ -414,6 +444,157 @@ body::-webkit-scrollbar-track {
 
 /*              Footer                 */
 
+/*             Sign in                  */
+.rootContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 1.25rem;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  border: 2px solid var(--dark-clr-700);
+  background-color: var(--dark-clr-700);
+  box-shadow: 5px 5px 5px 2px var(--dark-clr-300);
+  min-height: 70vh;
+  margin-inline: auto;
+  max-width: min(calc(100% - 3rem), 1100px);
+  margin-inline: auto;
+  --borderRadius: 0.45rem;
+}
+@media (width <= 1075px) {
+  .rootContainer {
+    width: 500px;
+  }
+}
+.signinPage {
+  background-color: var(--dark-clr-100);
+  color: var(--dark-clr-700);
+  padding-block: 2rem;
+  min-height: 90vh;
+  text-align: center;
+}
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1 1 500px;
+}
+.loginSidePanel,
+.signinSidePanel {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  place-content: center;
+  flex: 1 1 500px;
+  background-color: var(--dark-clr-700);
+  color: var(--dark-clr-100);
+  padding-block: 1rem;
+}
+.loginSidePanel a,
+.signinSidePanel a {
+  color: var(--dark-clr-100);
+  text-decoration: none;
+  font-size: 2rem;
+}
+.loginSidePanel a:hover,
+.signinSidePanel a:hover {
+  text-decoration: underline;
+}
+.formContainer label {
+  display: none;
+}
+.signinForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+}
+.signinForm input[type="text"],
+.signinForm input[type="password"] {
+  height: 3rem;
+  padding: 0.5rem 1rem;
+  outline: none;
+  border-radius: var(--borderRadius);
+  border: 2px solid var(--dark-clr-300);
+  font-size: 1.25rem;
+}
+.eyeIcon1 {
+  position: absolute;
+  right: 1rem;
+  top: 5rem;
+}
+.eyeIcon2 {
+  position: absolute;
+  right: 1rem;
+  top: 9rem;
+}
+
+.loginContainer,
+.signupContainer {
+  background-color: var(--dark-clr-100);
+  color: var(--dark-clr-700);
+  padding: 1rem;
+}
+
+.loginBtn,
+.signupBtn {
+  background-color: var(--dark-clr-700);
+  color: var(--dark-clr-100);
+  padding-block: 0.75rem;
+  border: none;
+  border-radius: var(--borderRadius);
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.loginWithFacebook {
+  background-color: var(--dark-clr-700);
+  color: var(--dark-clr-100);
+  padding-block: 0.75rem;
+  border: none;
+  border-radius: var(--borderRadius);
+  display: flex;
+  place-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-size: 1.25rem;
+}
+.loginWithGoogle {
+  background-color: var(--dark-clr-100);
+  color: var(--dark-clr-700);
+  padding-block: 0.75rem;
+  border: 2px solid var(--dark-clr-300);
+  border-radius: var(--borderRadius);
+  display: flex;
+  place-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-size: 1.25rem;
+}
+.getStarted {
+  display: block;
+  margin: 1rem auto;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  color: var(--dark-clr-100);
+  background-color: var(--dark-clr-700);
+  border-radius: 0.25rem;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+}
+
+/*               SearchResults                 */
+.searchItemWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
 /*              Utility Classes               */
 .py-right-2 {
   padding-right: 2rem;
@@ -432,3 +613,7 @@ body::-webkit-scrollbar-track {
 /* git remote add origin https://github.com/KrNiteshug21/MovieDise.git
 git branch -M main
 git push -u origin main */
+
+/* git add .
+git commit -m "first commit"
+git push origin master */

@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const ShowPage = () => {
@@ -10,9 +11,9 @@ const ShowPage = () => {
   const [showVideo, setShowVideo] = useState();
   const [loading, setLoading] = useState(true);
   const [showTrailer, setShowTrailer] = useState(false);
+  const [isFull, setIsFull] = useState(true);
   const trailer = showVideo?.find((sho) => {
-    if (!showVideo) return null;
-    else if (showVideo?.length === 0) return null;
+    if (showVideo?.length === 0) return null;
     else if (sho.type === "Trailer") return sho;
     else if (sho.type === "Featurette") return sho;
     else if (sho.type === "Clip") return sho;
@@ -70,16 +71,7 @@ const ShowPage = () => {
   return (
     <section className="moviePage">
       <div className="movieIntro setWidth">
-        {loading && (
-          <h1
-            style={{
-              display: "grid",
-              placeContent: "center",
-            }}
-          >
-            LOADING... PLEASE WAIT
-          </h1>
-        )}
+        {loading && <h1>LOADING... PLEASE WAIT</h1>}
         {!loading && (
           <>
             <img
@@ -88,9 +80,23 @@ const ShowPage = () => {
               alt={show?.title}
             />
             <div className="movieInfo">
-              <h2>
-                {show?.name} {"  "} {show?.first_air_date?.slice(0, 4)}
-              </h2>
+              <Link to={show?.homepage}>
+                <h2>
+                  {show?.name} {"  "} ({show?.first_air_date?.slice(0, 4)})
+                </h2>
+              </Link>
+              <p>
+                <b>First Aired:</b> {show?.first_air_date}{" "}
+              </p>
+              <p>
+                <b>Last Aired:</b> {show?.last_air_date}{" "}
+              </p>
+              <div>
+                <b>Languages:</b>{" "}
+                {show?.spoken_languages?.map((lang, index) => {
+                  return <span key={index}>{lang?.english_name}, </span>;
+                })}
+              </div>
               <div className="genre">
                 {show?.genres?.map((gen) => (
                   <span key={gen?.id}>
@@ -99,12 +105,28 @@ const ShowPage = () => {
                   </span>
                 ))}
               </div>
-              <p className="tagline">{show?.tagline}</p>
+              {show?.tagline && <p className="tagline">{show?.tagline}</p>}
               <button className="play" onClick={() => setShowTrailer(true)}>
                 <FaPlay />
                 Play Trailer
               </button>
-              <p className="overview">{show?.overview}</p>
+              <p className="overview">
+                {isFull ? `${show?.overview.slice(0, 200)}...` : show?.overview}{" "}
+                <button
+                  style={{
+                    color: "blue",
+                    backgroundColor: "transparent",
+                    border: "none",
+                    fontSize: "inherit",
+                  }}
+                  onClick={() => setIsFull(!isFull)}
+                >
+                  read more
+                </button>
+              </p>
+              <p>
+                <b>Status:</b> {show?.status}
+              </p>
             </div>
           </>
         )}
