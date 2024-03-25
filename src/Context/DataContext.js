@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import axios from "axios";
 
 const DataContext = createContext({});
 
@@ -8,22 +7,30 @@ export const DataProvider = ({ children }) => {
   const [filterMovies, setFilterMovies] = useState("popular");
   const [shows, setShows] = useState([]);
   const [filterShows, setFilterShows] = useState("airing_today");
-  const API_KEY = "fd66dd3881aa6ecdadeedc7bff8b736c";
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     const getMovies = async () => {
-      const url = `https://api.themoviedb.org/3/movie/${filterMovies}?api_key=${API_KEY}&language=en-US&append_to_response=videos,images`;
-      const response = await axios.get(url);
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZDY2ZGQzODgxYWE2ZWNkYWRlZWRjN2JmZjhiNzM2YyIsInN1YiI6IjY0YzEyMzU1MTNhMzIwMDBlMjFhOThlNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fibMrLld6TS6bvaKZtYYLL9TIpNC1PdRcKzFdu4QIwo",
+        },
+      };
 
-      if (response.status === 200) {
-        const movies = response.data.results;
-        setMovies(movies);
-        // console.log("movies", movies);
-      } else {
-        throw new Error(response.statusText);
-      }
+      fetch(
+        `https://api.themoviedb.org/3/movie/${filterMovies}?language=en-US&page=1`,
+        options
+      )
+        .then((response) => response.json())
+        .then((response) => {
+          // console.log("movies", response);
+          setMovies(response.results);
+        })
+        .catch((err) => console.error(err));
     };
 
     getMovies();
@@ -31,16 +38,25 @@ export const DataProvider = ({ children }) => {
 
   useEffect(() => {
     const getTvShows = async () => {
-      const url = `https://api.themoviedb.org/3/tv/${filterShows}?api_key=${API_KEY}&language=en-US&append_to_response=videos,images`;
-      const response = await axios.get(url);
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZDY2ZGQzODgxYWE2ZWNkYWRlZWRjN2JmZjhiNzM2YyIsInN1YiI6IjY0YzEyMzU1MTNhMzIwMDBlMjFhOThlNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fibMrLld6TS6bvaKZtYYLL9TIpNC1PdRcKzFdu4QIwo",
+        },
+      };
 
-      if (response.status === 200) {
-        const shows = response.data.results;
-        setShows(shows);
-        // console.log("tvshows", shows);
-      } else {
-        throw new Error(response.statusText);
-      }
+      fetch(
+        `https://api.themoviedb.org/3/tv/${filterShows}?language=en-US&page=1`,
+        options
+      )
+        .then((response) => response.json())
+        .then((response) => {
+          // console.log("shows", response);
+          setShows(response.results);
+        })
+        .catch((err) => console.error(err));
     };
 
     getTvShows();
@@ -62,13 +78,6 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     const options = {
       method: "GET",
-      url: "https://api.themoviedb.org/3/search/multi",
-      params: {
-        query: `${search}`,
-        include_adult: "false",
-        language: "en-US",
-        page: "1",
-      },
       headers: {
         accept: "application/json",
         Authorization:
@@ -76,15 +85,17 @@ export const DataProvider = ({ children }) => {
       },
     };
 
-    axios
-      .request(options)
-      .then((response) => {
-        console.log("SearchResults", response.data.results);
-        setSearchResults(response.data.results);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    search.length > 0 &&
+      fetch(
+        `https://api.themoviedb.org/3/search/multi?query=${search}&include_adult=false&language=en-US&page=1`,
+        options
+      )
+        .then((response) => response.json())
+        .then((response) => {
+          console.log(response);
+          setSearchResults(response.results);
+        })
+        .catch((err) => console.error(err));
   }, [search]);
 
   return (
@@ -98,7 +109,6 @@ export const DataProvider = ({ children }) => {
         setShows,
         filterShows,
         setFilterShows,
-        API_KEY,
         moviefilterArray,
         showFilterArray,
         search,

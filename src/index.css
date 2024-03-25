@@ -449,7 +449,6 @@ body::-webkit-scrollbar-track {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  flex-wrap: wrap;
   font-size: 1.25rem;
   border-radius: 1.25rem;
   overflow: hidden;
@@ -458,12 +457,13 @@ body::-webkit-scrollbar-track {
   box-shadow: 5px 5px 5px 2px var(--dark-clr-300);
   min-height: 70vh;
   margin-inline: auto;
-  max-width: min(calc(100% - 3rem), 1100px);
+  max-width: min(calc(100% - 3rem), 1000px);
   margin-inline: auto;
   --borderRadius: 0.45rem;
 }
-@media (width <= 1075px) {
+@media (width <= 800px) {
   .rootContainer {
+    flex-wrap: wrap;
     width: 500px;
   }
 }
@@ -609,11 +609,3 @@ body::-webkit-scrollbar-track {
 .py-block-1 {
   padding-block: 1rem;
 }
-
-/* git remote add origin https://github.com/KrNiteshug21/MovieDise.git
-git branch -M main
-git push -u origin main */
-
-/* git add .
-git commit -m "first commit"
-git push origin master */

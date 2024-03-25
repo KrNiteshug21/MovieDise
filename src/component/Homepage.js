@@ -13,7 +13,6 @@ const Homepage = () => {
     showFilterArray,
     search,
   } = useContext(DataContext);
-  console.log("search", search);
 
   return (
     <section>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaEyeSlash, FaEye, FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Signup = ({ show, setShow }) => {
   const [signupMail, setSignupMail] = useState("");
@@ -9,17 +10,28 @@ const Signup = ({ show, setShow }) => {
   const [confirmPwd, setConfirmPwd] = useState("");
   const [signupPwdType, setsignupPwdType] = useState("password");
   return (
-    <>
-      {show === "login" && (
-        <div className="signinSidePanel">
+    <AnimatePresence>
+      {show === "login" ? (
+        <motion.div
+          className="signinSidePanel"
+          initial={{ opacity: 0, translateX: 0 }}
+          animate={{ opacity: 1, translateX: 0 }}
+          exit={{ opacity: 0, translateX: -500 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
           <h1>Don't have an account?</h1>
           <Link to="#" onClick={(e) => setShow("signup")}>
             Signup
           </Link>
-        </div>
-      )}
-      {show === "signup" && (
-        <div className="signupContainer formContainer">
+        </motion.div>
+      ) : (
+        <motion.div
+          className="signupContainer formContainer"
+          initial={{ opacity: 0, translateX: 0 }}
+          animate={{ opacity: 1, translateX: 0 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
           <h2>Signup</h2>
           <form
             className="signinForm"
@@ -82,9 +94,9 @@ const Signup = ({ show, setShow }) => {
             <FcGoogle />
             Login with Google
           </Link>
-        </div>
+        </motion.div>
       )}
-    </>
+    </AnimatePresence>
   );
 };
 

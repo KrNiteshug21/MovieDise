@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaEyeSlash, FaEye, FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Login = ({ show, setShow }) => {
   const [loginMail, setLoginMail] = useState("");
@@ -9,18 +10,28 @@ const Login = ({ show, setShow }) => {
   const [loginPwdType, setloginPwdType] = useState("password");
 
   return (
-    <>
-      {show === "signup" && (
-        <div className="loginSidePanel">
+    <AnimatePresence onExitComplete>
+      {show === "signup" ? (
+        <motion.div
+          className="loginSidePanel"
+          initial={{ opacity: 0, translateX: 0 }}
+          animate={{ opacity: 1, translateX: 0 }}
+          exit={{ opacity: 0, translateX: 500 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
           <h1>Already have an account?</h1>
           <Link to="#" onClick={(e) => setShow("login")}>
-            {" "}
             Login
           </Link>
-        </div>
-      )}
-      {show === "login" && (
-        <div className="loginContainer formContainer">
+        </motion.div>
+      ) : (
+        <motion.div
+          className="loginContainer formContainer"
+          initial={{ opacity: 0, translateX: 0 }}
+          animate={{ opacity: 1, translateX: 0 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
           <h2>Login</h2>
           <form
             className="signinForm"
@@ -72,9 +83,9 @@ const Login = ({ show, setShow }) => {
             <FcGoogle />
             Login with Google
           </Link>
-        </div>
+        </motion.div>
       )}
-    </>
+    </AnimatePresence>
   );
 };
 

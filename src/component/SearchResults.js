@@ -9,10 +9,11 @@ const SearchResults = () => {
     <section className="container">
       <div className="searchItemWrapper setWidth">
         {searchResults
-          .filter((searchItem) => searchItem.media_type !== "person")
+          ?.filter((searchItem) => searchItem.media_type !== "person")
           .map((searchItem) => {
             return (
               <Movie
+                key={searchItem.id}
                 asset={searchItem}
                 link={searchItem.media_type === "tv" ? "show" : "movie"}
               />

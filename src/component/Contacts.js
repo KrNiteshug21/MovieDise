@@ -8,6 +8,8 @@ import { MdEmail } from "react-icons/md";
 import { FaPinterestSquare, FaInstagramSquare } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import TextReveal from "../Anim/TextReveal";
+import HeadReveal from "../Anim/HeadReveal";
 
 const Contacts = () => {
   const [fullName, setFullName] = useState("");
@@ -18,26 +20,34 @@ const Contacts = () => {
     <section className="contactPage">
       <div className="contactPageWrapper setWidth">
         <div className="contact py-block-2">
-          <h2>Contact Us</h2>
-          <p>
-            We're thrilled that you want to get in touch with us at Moviedise.
-            Whether you have questions, feedback, or simply want to connect with
-            fellow movie enthusiasts, we're here and eager to hear from you.
-            Feel free to reach us.
-          </p>
+          <TextReveal>
+            <HeadReveal text="Contact Us" />
+          </TextReveal>
+          <TextReveal>
+            <p>
+              We're thrilled that you want to get in touch with us at Moviedise.
+              Whether you have questions, feedback, or simply want to connect
+              with fellow movie enthusiasts, we're here and eager to hear from
+              you. Feel free to reach us.
+            </p>
+          </TextReveal>
         </div>
         <div className="py-block-2">
-          <h2>Feedback and Suggestions:</h2>
-          <p>
-            Your opinion matters to us! If you have suggestions for improving
-            our platform, features you'd like to see, or any other input, please
-            don't hesitate to share. We're constantly striving to enhance your
-            experience and value your insights. Thank you for considering
-            reaching out to [Your Movie Website Name]. We're dedicated to
-            providing a seamless and enjoyable experience for all movie
-            enthusiasts, and your engagement is essential in achieving that
-            goal. Let's continue celebrating the magic of cinema together!
-          </p>
+          <TextReveal>
+            <HeadReveal text="Feedback and Suggestions:" />
+          </TextReveal>
+          <TextReveal>
+            <p>
+              Your opinion matters to us! If you have suggestions for improving
+              our platform, features you'd like to see, or any other input,
+              please don't hesitate to share. We're constantly striving to
+              enhance your experience and value your insights. Thank you for
+              considering reaching out to <b>MovieDise</b>. We're dedicated to
+              providing a seamless and enjoyable experience for all movie
+              enthusiasts, and your engagement is essential in achieving that
+              goal. Let's continue celebrating the magic of cinema together!
+            </p>
+          </TextReveal>
         </div>
         <div className="contactDetail">
           <div className="contactForm py-block-2">
