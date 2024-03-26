@@ -9,7 +9,6 @@ import ShowPage from "./component/ShowPage";
 import IndexPage from "./component/IndexPage";
 import { Route, Routes } from "react-router-dom";
 import { DataProvider } from "./Context/DataContext";
-import Temp from "./component/Temp";
 
 function App() {
   return (
@@ -23,7 +22,6 @@ function App() {
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/movie/:id" element={<MoviePage />} />
           <Route path="/show/:id" element={<ShowPage />} />
-          <Route path="/tmp" element={<Temp />} />
         </Routes>
         <Footer />
       </DataProvider>
