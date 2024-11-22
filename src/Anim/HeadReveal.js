@@ -15,6 +15,7 @@ const HeadReveal = ({ text }) => {
       {text.split("").map((char, i) => {
         return (
           <motion.span
+            key={i}
             variants={textVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}

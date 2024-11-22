@@ -10,7 +10,7 @@ const Signup = ({ show, setShow }) => {
   const [confirmPwd, setConfirmPwd] = useState("");
   const [signupPwdType, setsignupPwdType] = useState("password");
   return (
-    <AnimatePresence>
+    <AnimatePresence onExitComplete={true}>
       {show === "login" ? (
         <motion.div
           className="signinSidePanel"

@@ -11,7 +11,7 @@ const ShowPage = () => {
   const [showVideo, setShowVideo] = useState();
   const [loading, setLoading] = useState(true);
   const [showTrailer, setShowTrailer] = useState(false);
-  const [isFull, setIsFull] = useState(true);
+  const [isFull, setIsFull] = useState(false);
   const trailer = showVideo?.find((sho) => {
     if (showVideo?.length === 0) return null;
     else if (sho.type === "Trailer") return sho;
@@ -20,14 +20,14 @@ const ShowPage = () => {
     else return showVideo[0];
   });
   // console.log("trailer", trailer);
+  console.log("Token", process.env.REACT_APP_AUTH_TOKEN);
 
   useEffect(() => {
     const options = {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZDY2ZGQzODgxYWE2ZWNkYWRlZWRjN2JmZjhiNzM2YyIsInN1YiI6IjY0YzEyMzU1MTNhMzIwMDBlMjFhOThlNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fibMrLld6TS6bvaKZtYYLL9TIpNC1PdRcKzFdu4QIwo",
+        Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN}`,
       },
     };
 
@@ -48,8 +48,7 @@ const ShowPage = () => {
       params: { language: "en-US" },
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZDY2ZGQzODgxYWE2ZWNkYWRlZWRjN2JmZjhiNzM2YyIsInN1YiI6IjY0YzEyMzU1MTNhMzIwMDBlMjFhOThlNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fibMrLld6TS6bvaKZtYYLL9TIpNC1PdRcKzFdu4QIwo",
+        Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN}`,
       },
     };
 

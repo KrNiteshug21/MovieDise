@@ -11,6 +11,7 @@ import { Route, Routes } from "react-router-dom";
 import { DataProvider } from "./Context/DataContext";
 
 function App() {
+  console.log("Token", process.env);
   return (
     <main className="App">
       <DataProvider>

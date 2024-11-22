@@ -11,8 +11,8 @@ const IndexPage = () => {
     <section className="signinPage">
       <div className="rootContainer">
         <AnimatePresence onExitComplete>
-          <Login show={show} setShow={setShow} />
-          <Signup show={show} setShow={setShow} />
+          <Login key={"login"} show={show} setShow={setShow} />
+          <Signup key={"signin"} show={show} setShow={setShow} />
         </AnimatePresence>
       </div>
       <Link to={"/home"} className="getStarted">
