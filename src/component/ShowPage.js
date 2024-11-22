@@ -19,8 +19,6 @@ const ShowPage = () => {
     else if (sho.type === "Clip") return sho;
     else return showVideo[0];
   });
-  // console.log("trailer", trailer);
-  console.log("Token", process.env.REACT_APP_AUTH_TOKEN);
 
   useEffect(() => {
     const options = {
